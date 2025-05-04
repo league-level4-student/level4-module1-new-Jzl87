@@ -4,16 +4,23 @@ public class BackwardsString implements TextFunkifier {
 
     private String unfunkifiedText;
 
-    public BackwardsString(String unfunkifiedText) {
+    public BackwardsString (String unfunkifiedText) {
 
         this.unfunkifiedText = unfunkifiedText;
 
     }
+    
 
     @Override
     public String funkifyText() {
-
-        return null;
+    	String x = "";
+    	char[] y = unfunkifiedText.toCharArray();
+    	
+    	for (int z = y.length-1; z>=0; z--) {
+    		x += y[z];
+    	}
+    	
+        return x;
 
     }
 }

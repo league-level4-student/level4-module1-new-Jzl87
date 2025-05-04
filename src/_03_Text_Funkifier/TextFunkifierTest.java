@@ -42,8 +42,10 @@ public class TextFunkifierTest {
      * make it pass.
      */
 
-    @Test
-    public void testCustomString() {
 
+    @Test
+    public void testSpaceOutString() {
+        SpaceOut mcs = new SpaceOut("This is also a test");
+        assertEquals("T  h  i  s     i  s     a  l  s  o     a     t  e  s  t  ", mcs.funkifyText());
     }
 }
