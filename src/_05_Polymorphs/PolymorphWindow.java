@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -59,23 +60,33 @@ public class PolymorphWindow extends JPanel implements ActionListener {
 
     private JFrame window;
     private Timer timer;
-
-    Polymorph bluePoly;
-
+    
+    ArrayList <Polymorph> morph = new ArrayList <Polymorph>();
+    
     public static void main(String[] args) {
         new PolymorphWindow().buildWindow();
     }
 
     public void buildWindow() {
-        window = new JFrame("IT'S MORPHIN' TIME!");
+        window = new JFrame("IT'S MORBIN' TIME!");
         window.add(this);
         window.getContentPane().setPreferredSize(new Dimension(500, 500));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.pack();
         window.setVisible(true);
-
-        bluePoly = new BluePolymorph(50, 50);
-
+        
+        
+        Polymorph mouse = new MouseMorph(WIDTH/2,HEIGHT/2, 30, 30);
+        this.addMouseMotionListener((MouseMorph) mouse);
+        Polymorph click = new ClickMorph(300,300, 100, 100);
+        this.addMouseListener((ClickMorph) click);
+        
+        morph.add(new BluePolymorph(10,10, 90, 90));
+        morph.add(new RedPolymorph(50,50, 50, 50));
+        morph.add(new MovingMorph(0,0, 60, 60));
+        morph.add(mouse);
+        morph.add(click);
+    
         timer = new Timer(1000 / 30, this);
         timer.start();
     }
@@ -84,15 +95,18 @@ public class PolymorphWindow extends JPanel implements ActionListener {
         // draw background
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, 500, 500);
-
-        // draw polymorph
-        bluePoly.draw(g);
+        
+        for (Polymorph p: morph) {
+        	p.draw(g);
+        }
+      
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-        bluePoly.update();
-
+        for (Polymorph p: morph) {
+        	p.update();
+        }
     }
 }
