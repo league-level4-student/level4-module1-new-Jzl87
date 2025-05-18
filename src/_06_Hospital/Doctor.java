@@ -6,19 +6,33 @@ public abstract class Doctor {
 	
 	ArrayList <Patient> patients;
 	
+	
 	public Doctor () {
 		patients = new ArrayList <Patient> ();
 	}
 	
 	public String doMedicine() {
+		for (Patient p : patients) {
+			p.setCaredFor(true);
+		}
 		return "medicine done";
 	}
 	
-	public void addPatient (Patient p) {
-		patients.add(p);
+	public void assignPatient (Patient p) throws Exception {
+		if (patients.size() < 3) {
+			patients.add(p);
+		} else {
+			throw new DoctorFullException();
+		}
+		
 	}
 	
-	public ArrayList<Patient> getList(){
+	public ArrayList<Patient> getPatients(){
 		return patients;
 	}
+	
+	public abstract boolean makesHouseCalls();
+	
+	public abstract boolean performsSurgery();
+	
 }

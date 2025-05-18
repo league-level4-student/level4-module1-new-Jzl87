@@ -72,7 +72,7 @@ public class HospitalTest extends TestCase {
     // When you check a patient's pulse, they feel cared for
     public void testCheckPulse() throws Exception {
         Patient testPatient = new Patient();
-        //Note: Accessors for booleans typically don't use "get"
+        //Note:  for booleans typically don't use "get"
         assertEquals(false, testPatient.feelsCaredFor());
         testPatient.checkPulse();
         assertEquals(true, testPatient.feelsCaredFor());
@@ -110,6 +110,18 @@ public class HospitalTest extends TestCase {
     public void test8Patients() throws Exception {
 
         testHospital.assignPatientsToDoctors();
+        testHospital.addDoctor(new Surgeon());
+        testHospital.addDoctor(new Surgeon());
+        testHospital.addDoctor(new Surgeon());
+        
+        testHospital.addPatient(new Patient());
+        testHospital.addPatient(new Patient());
+        testHospital.addPatient(new Patient());
+        testHospital.addPatient(new Patient());
+        testHospital.addPatient(new Patient());
+        testHospital.addPatient(new Patient());
+        testHospital.addPatient(new Patient());
+        testHospital.addPatient(new Patient());
 
         List<Doctor> testDoctors = testHospital.getDoctors();
         assertEquals(3, testDoctors.get(0).getPatients().size());
